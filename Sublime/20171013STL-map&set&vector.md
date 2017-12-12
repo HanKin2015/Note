@@ -12,3 +12,16 @@ categories:
 - STL
 
 ---
+
+[c++中vector的用法详解](http://blog.csdn.net/hancunai0017/article/details/7032383)
+
+
+
+
+
+
+
+
+
+
+

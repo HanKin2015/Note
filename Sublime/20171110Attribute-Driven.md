@@ -1,15 +1,14 @@
 ---
 layout: '[default_layout]'   
-title: 欧拉定理                 
-date: 2017-09-30 17:58:41  
+title: Attribute-Driven Community Search           
+date: 2017-11-15 10:47:41  
 toc: true                  
 tags:                        
-- git
+- Sublime
 
 categories:                  
-- 
+- others
 
 ---
 
-
-
+<!--more-->
