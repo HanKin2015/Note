@@ -22,14 +22,13 @@ type="application/x-shockwave-flash"></object>
 Git有什么特点？简单来说就是：高端大气上档次！
 
 这个软件用起来就应该像这个样子，能记录每次文件的改动：
-
+<!-- more  -->
 版本  用户  说明  日期
 1   张三  删除了软件服务条款5  7/12 10:38
 2   张三  增加了License人数限制  7/12 18:09
 3   李四  财务部门调整了合同金额 7/13 9:51
 4   张三  延长了免费升级周期   7/14 15:17
 这样，你就结束了手动管理多个“版本”的史前时代，进入到版本控制的20世纪。
-<!-- more  -->
 
 ## 在Windows上安装Git
 
@@ -97,3 +96,20 @@ new pull request
 ### [Git fetch和git pull的区别](http://blog.csdn.net/hudashi/article/details/7664457)
 
 http://blog.csdn.net/wh_19910525/article/details/7554489
+
+
+git是一种版本控制系统。跟svn、cvs是同级的概念。
+github是一个网站，给用户提供git服务。这样你就不用自己部署git系统，直接用注册个账号，用他们提供的git服务就可以。
+
+# 提交说明
+
+1. fork这个项目到自己的coding.net库
+2. pull这个项目到本地
+fatal: Not a git repository (or any of the parent directories): .git
+原因：你没有初始化git init
+
+
+3. 按照学生信息表.md的示例填写自己的相关信息
+4. push到自己的coding.net库
+5. 提PR到https://coding.net/u/greyzeng/p/WHU_SE_2017/git/tree/master
+http://overflowstack.github.io/

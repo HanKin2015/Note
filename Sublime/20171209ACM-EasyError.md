@@ -32,59 +32,110 @@ int main()
 #include <iostream>
 using namespace std;
 
-int ans;
-
-void dfs(int arr[], int dex, bool flag[], int N) {
-    if(dex == 3 && arr[1] + arr[2] >= N) return;
-    if(dex == 4 && arr[1] + arr[3] >= N) return;
-    if(dex == 5) {
-        arr[5] = N - arr[1] - arr[3];
-        arr[6] = N - arr[2] - arr[4];
-        arr[7] = N - arr[1] - arr[2];
-        arr[8] = N - arr[3] - arr[4];
-        arr[9] = N - arr[7] - arr[8];
-        for(int i = 1; i <= 9; i++) if(arr[i] < 1) return;
-        for(int i = 5; i <= 9; i++) if(flag[arr[i]]) return;
-        if((arr[5]+arr[6]+arr[9] == N)&&(arr[1]+arr[4]+arr[9] == N)&&(arr[5]+arr[4]+arr[7] == N)) {
-           ans++;
-        }
-        return;
-    }
-    if(dex > 5) return;
-    for(int i = 1; i <= N; i++) {
-        if(!flag[i]) {
-            flag[i] = true;
-            arr[dex] = i;
-            dfs(arr, dex+1, flag, N);
-            flag[i] = false;
-        }
-    }
+void Sum(int arr[], int tag, int &sum, int n) {
+    if(tag > 3) return;
+    if(n > 4) return;
+    sum += arr[tag];
+    //tag使用++，但值没有传递过去，一直都是0，所以输出是5；如果tag使用+1，输出则是10
+    Sum(arr, tag++, sum, n + 1);
     return;
 }
 
 int main()
 {
-    int N;
-//    for(N = 12; N <= 100; N++){
-//        ans = 0;
-//        int arr[10];
-//        bool flag[105];
-//        for(int i = 0; i < 105; i++) flag[i] = false;
-//        dfs(arr, 1, flag, N);
-//        cout << ans << ',';
-//    }
-    int num[105] = {0,0,0,8,0,0,24,0,0,32,0,0,56,0,0,80,0,0,104,0,0,136,0,0,176,0,0,208,0,0,256,0,0,304,0,0,352,0,0,408,0,0,472,0,0,528,0,0,600,0,0,672,0,0,744,0,0,824,0,0,912,0,0,992,0,0,1088,0,0,1184,0,0,1280,0,0,1384,0,0,1496,0,0,1600,0,0,1720,0,0,1840,0};
-    while(cin >> N) {
-        cout << num[N - 12] << endl;
+    int arr[] = {1, 2, 3, 4, 5, 6}, sum = 0;
+    Sum(arr, 0, sum, 0);
+    cout << sum << endl;
+    return 0;
+}
+```
+
+# 易错点3：pow函数的使用
+原型：在TC2.0中原型为extern float pow(float x, float y); ，而在VC6.0中原型为double pow( double x, double y );
+头文件：math.h/cmath(C++中)
+功能：计算x的y次幂。
+返回值：x不能为负数且y为小数，或者x为0且y小于等于0，返回幂指数的结果。
+返回类型：double型，int，float会给与警告！
+```C++
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    for(int i = 2; i < 1000; i++) {
+        int n = i, sum = 0;
+        while(n) {
+            //sum += pow(n % 10, 3);
+            int tmp = n % 10;
+            sum += tmp * tmp * tmp;
+            n /= 10;
+        }
+        if(sum == i) cout << i << "  ";
+    }
+    cout << endl;
+    int tmp = pow(5, 3);
+    cout << tmp << endl;
+    cout << pow(5, 3) << endl;
+    double t = pow(5, 3);
+    cout << t << endl;
+    return 0;
+}
+```
+
+# 易错点4：char数组
+给char数组赋值时记得在末尾以'\0'字符，计算长度的时候不会计算在内。
+```C++
+#include <iostream>
+#include <bits/stdc++.h>
+#define NSIZE 8
+using namespace std;
+
+int main()
+{
+    char g[7] = {'h', 'e', 'j', 'i', 'a', 'n', '\0'};
+    cout << strlen(g) << endl;
+    cout << g << endl;
+
+    //只要多给出一个字符空间，编译器会自动在末尾添加'\0'
+    char gg[10] = {'h', 'e', 'j', 'i', 'a', 'n'};
+    cout << strlen(gg) << endl;
+    cout << gg << endl;
+
+    char *s = "hejian";
+    cout << strlen(s) << endl;
+    cout << s << endl;
+
+    char k[7];
+    k[0] = 'h', k[1] = 'e', k[2] = 'j', k[3] = 'i', k[4] = 'a', k[5] = 'n', k[6] = '\0';
+    cout << strlen(k) << endl;
+    cout << k << endl;
+
+    char f[6];
+    cin >> f;   //这里会自动扩充空间
+    cout << strlen(f) << endl;
+    cout << f << endl;
+    return 0;
+}
+```
+
+# 易错点5：for循环中多个变量
+```C++
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //这样会输出6个hello，相当于中间是或运算，需要加与符号
+    for(int i = 0, j = 0; i < 4, j < 6; i++, j++) {
+        cout << "hello" << endl;
     }
     return 0;
 }
 ```
 
+# 易错点6：容器中使用叠加容器出现>>
+第一种可能是流运算符，也就是cin>>+输入内容
+第二种可能是位运算，即x>>n把数表示为二进制后每位都想右移N位
 
-
-
-
-
-
-
+所以在容器中需要空格隔开，如list< int, list< int, int> >。
