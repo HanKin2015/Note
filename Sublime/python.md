@@ -61,11 +61,23 @@ None 值没有意义，可用于代表某些初始状态；
 
 # 4、python2.x和python3.x的比较
 
+# 5、import stdio
+https://introcs.cs.princeton.edu/python/windows/
 
+# 6、安装xgboost
+win10 python3.5
+1>[Python Extension Packages for Windows](https://link.zhihu.com/?target=http%3A//www.lfd.uci.edu/%7Egohlke/pythonlibs/%23xgboost)下载对应版本，我的是64位，python3.5
 
+pip install D:\xgboost-0.6-cp35-cp35m-win_amd64.whl
 
+# 7、python with as的用法
+在with后面的代码块抛出任何异常时，__exit__()方法被执行。正如例子所示，异常抛出时，与之关联的type，value和stack trace传给__exit__()方法，因此抛出的ZeroDivisionError异常被打印出来了。开发库时，清理资源，关闭文件等等操作，都可以放在__exit__方法当中。
+因此，Python的with语句是提供一个有效的机制，让代码更简练，同时在异常产生时，清理工作更简单。
 
-
-
-
+# 8、python中的骚操作
+```
+mark = [1, 2, 3, 4, 5]
+good = [i + 4 for i in mark if i < 5]
+把mark中小于5的数加上4后存储到good里面
+```
 

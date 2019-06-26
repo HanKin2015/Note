@@ -74,7 +74,11 @@ https://zhidao.baidu.com/question/1835542959431198660.html
 http://blog.csdn.net/onepiecehuiyu/article/details/75208743
 贴代码https://www.v2ex.com/t/89097
 
+学习爬虫http://blog.csdn.net/u010657489
 
+http://blog.csdn.net/u013569000/article/details/53886656
+http://blog.csdn.net/u011077672/article/details/50960580
+http://blog.csdn.net/qiaoxiaoming2000/article/details/42966287
 
 
 

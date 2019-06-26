@@ -1,3 +1,21 @@
+---
+layout: '[default_layout]'   
+title: 鸟叔的Linux私房菜1           
+date: 2017-08-03 10:47:41  
+updated: 
+permalink: 
+render_drafts: true
+copyright: true
+password: 
+comments: true
+toc: true                  
+tags:                        
+- Linux
+
+categories:                  
+- Linux
+
+---
 <center><strong><h1>鸟叔的Linux</h1></strong></center>
 
 # 2017.8.3晚
@@ -8,7 +26,7 @@
 - CPU每次能够处理的数据量称为字组大小，即32bit和64bit
 - DRAM、SRAM、ROM
 - 1Byte=8bits
-
+<!--more-->
 ### 第1章 Linux是什么
 - 操作系统
 - 麦金塔计算机MAC
@@ -326,4 +344,53 @@ deepin默认是F7模式
 date 显示日期和时间
 command [-options] parameter1 parameter2 ...
 命令      选项        参数1      参数2
+
+
+# 在vim下按ctrl+s后界面卡住
+用惯了window编辑器的我们，在使用linux vim编辑器时会不会遇到这个问题：在编辑时总是会不小心按下Ctrl+S,然后整个终端都没有反应了？其实在Linux下 Ctrl+S是有特殊的用途的，不能乱按。 
+在Linux下，Ctrl+S 是暂停该终端，阻止向该终端输出。那如何解决呢？按下Ctrl+Q就可以了。在Linux终端 Ctrl+Q ：恢复向终端输出。
+
+# make j* make j4 make j8 区别
+make -j4是什么意思
+看书上说
+1） make(1)只衍生一个作业／／作业是什么意思？make(1) 是不是就是make的意思?
+2） 在双处理器上make -j4，难道是让每个处理器跑两个作业？那和make -j2效率相比 难道不是一样的？
+
+
+新手提问 多多关照
+
+------解决方案--------------------
+make(1)表示在unix手册(man)的第一章，可以用 man 1 make 来查看。
+
+两个处理器的话，一般 -j2 能达到最高效率。
+不过也有些进程会花时间在IO上，并不能利用完单个cpu的时间。这样 -j4 可以更快。 
+------解决方案--------------------
+jobs=4
+同时最多跑4个作业
+make自己会协调，如果CPU等资源不够可能小于4个。不过一般瓶颈都在硬盘，所以一般能看到4个进程一起跑。 
+------解决方案--------------------
+启用4个cpu去编译。提高编译速度。 
+------解决方案--------------------
+感觉指的是逻辑线程数，和CPU无关，逻辑线程具体跑在哪个逻辑CPU上应该是由内核决定的。make说白了也只是个程序而已。
+
+========================================
+
+
+make(gmake,gnumake)的-j参数，优化多核、多线程的编译过程
+
+# 更新GCC版本
+#查看当前版本
+gcc --version #显示4.7
+cd /
+wget ftp.gnu.org/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.gz
+tar -zxvf gcc-7.3.0.tar.gz
+cd gcc-7.3.0
+#检测和安装相关依赖包，这个过程需要耐心等待(此步骤会将依赖包下载到gcc-7.3.0目录，如果因网络原因无法完成请自行使用wget下载)
+./contrib/download_prerequisites
+mkdir build
+cd build
+../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib
+#编译过程漫长，请耐心等待
+make -j4
+make install
 
